@@ -6,9 +6,9 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "react-native-reanimated";
 import {
   Poppins_100Thin,
@@ -23,7 +23,10 @@ import {
 } from "@expo-google-fonts/poppins";
 
 import { useColorScheme } from "@/components/useColorScheme";
-import { Platform } from "react-native";
+import { Platform, SafeAreaView, TouchableOpacity } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { setItem } from "@/helpers/storage";
+import { Ionicons } from "@expo/vector-icons";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -32,7 +35,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "auth",
+  initialRouteName: "onboarding_auth",
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -70,24 +73,73 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-  const auth = false;
+  const router = useRouter();
+  const [auth, setAuth] = useState<boolean>(false);
+
+  const getStorage = async () => {
+    const auth = await AsyncStorage.getItem("auth");
+    if (auth) {
+      setAuth(auth === "true");
+    }
+  };
+
+  const setStorage = async (auth: boolean) => {
+    await setItem("auth", auth.toString());
+    setAuth(auth);
+  };
+
+  const handleClick = (path: string) => {
+    router.push(path);
+  };
+
+  useEffect(() => {
+    setStorage(false);
+    getStorage();
+
+    console.log("RootLayoutNav", auth);
+  }, [auth]);
+
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        {auth ? (
-          <>
-            <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-            <Stack.Screen name='modal' options={{ presentation: "modal" }} />
-          </>
-        ) : (
+      {auth ? (
+        <Stack>
+          <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+          <Stack.Screen name='modal' options={{ presentation: "modal" }} />
+        </Stack>
+      ) : (
+        <Stack>
           <Stack.Screen
-            name='auth'
+            name='onboarding_auth'
             options={{
               headerShown: false,
             }}
           />
-        )}
-      </Stack>
+          <Stack.Screen
+            name='login'
+            options={{
+              // headerTitle: "",
+              // headerTransparent: true,
+              headerShown: false,
+              // headerLeft: () => (
+              //   <TouchableOpacity style={{}} onPress={() => router.back()}>
+              //     {Platform.OS === "ios" ? (
+              //       <Ionicons
+              //         name='chevron-back'
+              //         size={30}
+              //         color='black'
+              //         style={{ marginRight: 5 }}
+              //       />
+              //     ) : (
+              //       <Ionicons name='arrow-back' size={30} color='black' />
+              //     )}
+              //   </TouchableOpacity>
+              // ),
+            }}
+          />
+        </Stack>
+      )}
+
+      {/* </SafeAreaView> */}
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
     </ThemeProvider>
   );

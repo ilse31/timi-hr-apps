@@ -1,23 +1,36 @@
 import { ManyUsers, UserIcons } from "@/assets/icons";
 import { Text, View as CustomView } from "@/components/Themed";
+import { useRouter } from "expo-router";
 import React from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
 
 const auth = () => {
+  const router = useRouter();
+
+  const handleClick = (path: string) => {
+    router.push(path);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <CustomView lightColor='#fff' style={styles.container}>
         <Text style={styles.textHeader}>Masuk ke timi</Text>
         <Text style={styles.subText}>Saya Ingin Masuk Sebagai</Text>
         <View style={styles.iconContainer}>
-          <View style={styles.rectangleView}>
+          <TouchableOpacity
+            style={styles.rectangleView}
+            onPress={() => handleClick("/login")}
+          >
             <UserIcons width={40} height={40} />
             <Text style={styles.pengelola}>HR</Text>
-          </View>
-          <View style={styles.rectangleView}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.rectangleView}
+            onPress={() => handleClick("/login")}
+          >
             <ManyUsers width={40} height={40} />
             <Text style={styles.pengelola}>Employee</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </CustomView>
     </SafeAreaView>
