@@ -91,7 +91,7 @@ const Login = () => {
                   id='Password'
                 />
               </View>
-              <Text className="text-blue-500 text-xs font-normal font-['Poppins'] leading-[14.40px] pt-5">
+              <Text className='text-blue-500 text-xs font-normal leading-[14.40px] pt-5'>
                 Lupa password?
               </Text>
             </View>
