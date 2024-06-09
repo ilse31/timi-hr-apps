@@ -1,5 +1,7 @@
 import { ManyUsers, UserIcons } from "@/assets/icons";
+import SafeAreaViewAndroid from "@/components/SafeAreaViewAndroid";
 import { Text, View as CustomView } from "@/components/Themed";
+import Typography from "@/components/Typography";
 import { useRouter } from "expo-router";
 import React from "react";
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
@@ -12,9 +14,10 @@ const auth = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={SafeAreaViewAndroid.AndroidSafeArea}>
       <CustomView lightColor='#fff' style={styles.container}>
-        <Text style={styles.textHeader}>Masuk ke timi</Text>
+        {/* <Text style={styles.textHeader}>Masuk ke timi</Text> */}
+        <Typography variant='titleHeader'>Masuk ke timi</Typography>
         <Text style={styles.subText}>Saya Ingin Masuk Sebagai</Text>
         <View style={styles.iconContainer}>
           <TouchableOpacity

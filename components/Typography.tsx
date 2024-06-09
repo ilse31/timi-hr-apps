@@ -1,6 +1,7 @@
 import * as React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text } from "react-native";
 import clsx from "clsx";
+import { NativeWindStyleSheet } from "nativewind";
 
 const TypographyVariant = [
   "j1",
@@ -24,6 +25,7 @@ const TypographyVariant = [
   "l2",
   "label",
   "subText",
+  "titleHeader",
 ] as const;
 
 const TypographyColor = [
@@ -36,7 +38,7 @@ const TypographyColor = [
 
 type TypographyProps<T extends React.ElementType> = {
   as?: T;
-  className?: string;
+  classNames?: string;
   color?: (typeof TypographyColor)[number];
   variant?: (typeof TypographyVariant)[number];
   children: React.ReactNode;
@@ -60,6 +62,12 @@ const styles: TypographyStyles & ColorStyles = {
     fontWeight: "400",
     fontFamily: "Poppins_400Regular",
     lineHeight: 28,
+  },
+  titleHeader: {
+    fontSize: 20,
+    lineHeight: 20,
+    fontWeight: "600",
+    fontFamily: "Poppins_600SemiBold",
   },
   j1: { fontSize: 36, fontWeight: "700", fontFamily: "Poppins_700Bold" },
   j2: { fontSize: 30, fontWeight: "700", fontFamily: "Poppins_700Bold" },
@@ -95,19 +103,27 @@ const styles: TypographyStyles & ColorStyles = {
   tertiary: { color: "gray-500" },
   danger: { color: "red-500" },
   white: { color: "white" },
-  label: { fontSize: 12, fontWeight: "600" },
+  label: {
+    fontSize: 12, // Equivalent to text-xs
+    fontWeight: "600", // Equivalent to font-semibold
+    lineHeight: 14.4, // Equivalent to leading-[14.40px]
+  },
 };
 
 const Typography: TypographyComponent = ({
   as,
   children,
-  className,
+  classNames,
   color = "secondary",
   variant = "b2",
   ...rest
 }: TypographyProps<any>) => {
   return (
-    <Text {...rest} style={[styles[variant], styles[color], clsx(className)]}>
+    <Text
+      {...rest}
+      className={clsx(classNames)}
+      style={[styles[variant], styles[color]]}
+    >
       {children}
     </Text>
   );
