@@ -34,14 +34,11 @@ const TypographyColor = [
   "white",
 ] as const;
 
-const TypographyFont = ["averta", "inter"] as const;
-
 type TypographyProps<T extends React.ElementType> = {
   as?: T;
   className?: string;
   color?: (typeof TypographyColor)[number];
   variant?: (typeof TypographyVariant)[number];
-  font?: (typeof TypographyFont)[number];
   children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<T>;
 
@@ -107,7 +104,6 @@ const Typography: TypographyComponent = ({
   className,
   color = "secondary",
   variant = "b2",
-  font,
   ...rest
 }: TypographyProps<any>) => {
   return (
