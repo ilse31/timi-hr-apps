@@ -76,29 +76,6 @@ function RootLayoutNav() {
   const router = useRouter();
   const [auth, setAuth] = useState<boolean>(false);
 
-  const getStorage = async () => {
-    const auth = await AsyncStorage.getItem("auth");
-    if (auth) {
-      setAuth(auth === "true");
-    }
-  };
-
-  const setStorage = async (auth: boolean) => {
-    await setItem("auth", auth.toString());
-    setAuth(auth);
-  };
-
-  const handleClick = (path: string) => {
-    router.push(path);
-  };
-
-  useEffect(() => {
-    setStorage(false);
-    getStorage();
-
-    console.log("RootLayoutNav", auth);
-  }, [auth]);
-
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       {auth ? (
