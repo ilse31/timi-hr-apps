@@ -1,3 +1,4 @@
+import BackButton from "@/components/BackButton";
 import Button from "@/components/Button";
 import Input from "@/components/FormInput";
 import SafeAreaViewAndroid from "@/components/SafeAreaViewAndroid";
@@ -31,23 +32,15 @@ const Login = () => {
 
   const handleChange = (key: string, val: string) => {
     setValue((prev) => ({ ...prev, [key]: val }));
-    console.log(value);
   };
 
   const handleSubmit = () => {
-    console.log(value);
+    router.push("(tabs)");
   };
 
   return (
     <SafeAreaView style={SafeAreaViewAndroid.AndroidSafeArea}>
-      <TouchableOpacity onPress={() => router.back()}>
-        <Ionicons
-          name={Platform.OS === "ios" ? "chevron-back" : "arrow-back"}
-          size={25}
-          color='black'
-          style={{ marginLeft: Platform.OS === "ios" ? 5 : 10 }}
-        />
-      </TouchableOpacity>
+      <BackButton />
       <CustomView style={styles.container} lightColor='#fff'>
         <Typography classNames='mt-8' variant='subText'>
           Masuk sebagai karyawan
