@@ -26,6 +26,7 @@ const TypographyVariant = [
   "label",
   "subText",
   "titleHeader",
+  "subtitle",
 ] as const;
 
 const TypographyColor = [
@@ -107,6 +108,11 @@ const styles: TypographyStyles & ColorStyles = {
     fontSize: 12, // Equivalent to text-xs
     fontWeight: "600", // Equivalent to font-semibold
     lineHeight: 14.4, // Equivalent to leading-[14.40px]
+  },
+  subtitle: {
+    fontSize: 12, // Equivalent to text-sm
+    fontWeight: "400", // Equivalent to font-normal
+    lineHeight: 14, // Equivalent to leading-[20px]
   },
 };
 

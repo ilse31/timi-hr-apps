@@ -94,23 +94,13 @@ function RootLayoutNav() {
           <Stack.Screen
             name='login'
             options={{
-              // headerTitle: "",
-              // headerTransparent: true,
               headerShown: false,
-              // headerLeft: () => (
-              //   <TouchableOpacity style={{}} onPress={() => router.back()}>
-              //     {Platform.OS === "ios" ? (
-              //       <Ionicons
-              //         name='chevron-back'
-              //         size={30}
-              //         color='black'
-              //         style={{ marginRight: 5 }}
-              //       />
-              //     ) : (
-              //       <Ionicons name='arrow-back' size={30} color='black' />
-              //     )}
-              //   </TouchableOpacity>
-              // ),
+            }}
+          />
+          <Stack.Screen
+            name='forgot_password'
+            options={{
+              headerShown: false,
             }}
           />
         </Stack>

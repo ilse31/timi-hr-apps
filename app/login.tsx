@@ -4,7 +4,7 @@ import SafeAreaViewAndroid from "@/components/SafeAreaViewAndroid";
 import { View as CustomView } from "@/components/Themed";
 import Typography from "@/components/Typography";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import React, { useCallback, useState } from "react";
 import {
   Platform,
@@ -91,9 +91,12 @@ const Login = () => {
                   id='Password'
                 />
               </View>
-              <Text className='text-blue-500 text-xs font-normal leading-[14.40px] pt-5'>
+              <Link
+                href={"forgot_password"}
+                className='text-blue-500 text-xs font-normal leading-[14.40px] pt-5'
+              >
                 Lupa password?
-              </Text>
+              </Link>
             </View>
           </View>
           <Button variant='primary' onPress={handleSubmit} size='base'>
