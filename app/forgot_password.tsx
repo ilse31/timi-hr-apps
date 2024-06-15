@@ -46,11 +46,10 @@ const ForgotPassword = () => {
     <SafeAreaView style={SafeAreaViewAndroid.AndroidSafeArea}>
       <BackButton />
       <CustomView className='flex-1'>
-        <Typography variant='subText'>Forgot Password</Typography>
-        <Typography variant='subtitle'>
-          Please enter your email address to reset your password
+        <Typography classNames='mt-5' variant='subtitle'>
+          Masukan Email kamu yang terdaftar
         </Typography>
-        <View className='w-full flex-1'>
+        <View className='w-full flex-1 mt-5'>
           <Input
             className='mt-5'
             id='email'
