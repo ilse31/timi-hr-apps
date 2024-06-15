@@ -9,6 +9,7 @@ type PasswordInputProps = {
   isShowPassword: boolean;
   onChangeText: (text: string) => void;
   onToggleShowPassword: () => void;
+  errorMessage?: string;
 };
 
 const PasswordInput = ({
@@ -17,6 +18,7 @@ const PasswordInput = ({
   isShowPassword,
   onChangeText,
   onToggleShowPassword,
+  errorMessage,
 }: PasswordInputProps) => {
   return (
     <View style={styles.inputContainer}>
@@ -36,6 +38,7 @@ const PasswordInput = ({
             onPress={onToggleShowPassword}
           />
         }
+        errorMessage={errorMessage}
         variant='outline'
         id={label}
       />
