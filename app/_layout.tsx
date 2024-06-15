@@ -24,9 +24,6 @@ import {
 
 import { useColorScheme } from "@/components/useColorScheme";
 import { Platform, SafeAreaView, TouchableOpacity } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { setItem } from "@/helpers/storage";
-import { Ionicons } from "@expo/vector-icons";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -99,6 +96,18 @@ function RootLayoutNav() {
           />
           <Stack.Screen
             name='forgot_password'
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name='inputotp'
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name='newpassword'
             options={{
               headerShown: false,
             }}

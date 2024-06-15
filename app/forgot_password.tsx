@@ -31,14 +31,11 @@ const ForgotPassword = () => {
   };
 
   useEffect(() => {
-    if (isMounted) {
-      const timer = setTimeout(() => {
-        handleChangeNextPage();
+    if (overLay) {
+      setTimeout(() => {
+        setOverLay(false);
+        router.push("inputotp");
       }, 1000);
-
-      return () => clearTimeout(timer);
-    } else {
-      setIsMounted(true);
     }
   }, [overLay]);
 
