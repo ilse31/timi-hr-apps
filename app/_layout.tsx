@@ -24,6 +24,8 @@ import {
 
 import { useColorScheme } from "@/components/useColorScheme";
 import { Platform, SafeAreaView, TouchableOpacity } from "react-native";
+import { GluestackUIProvider } from "@gluestack-ui/themed";
+import { config } from "@gluestack-ui/config";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -74,49 +76,59 @@ function RootLayoutNav() {
   const [auth, setAuth] = useState<boolean>(false);
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      {auth ? (
-        <Stack>
-          <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-          <Stack.Screen name='modal' options={{ presentation: "modal" }} />
-        </Stack>
-      ) : (
-        <Stack>
-          <Stack.Screen
-            name='onboarding_auth'
-            options={{
+    <GluestackUIProvider config={config}>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        {auth ? (
+          <Stack
+            screenOptions={{
               headerShown: false,
+              presentation: "card",
             }}
-          />
-          <Stack.Screen
-            name='login'
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name='forgot_password'
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name='inputotp'
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name='newpassword'
-            options={{
-              headerShown: false,
-            }}
-          />
-        </Stack>
-      )}
+          >
+            <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+            <Stack.Screen
+              name='modal'
+              options={{ presentation: "modal", headerShown: false }}
+            />
+          </Stack>
+        ) : (
+          <Stack>
+            <Stack.Screen
+              name='onboarding_auth'
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name='login'
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name='forgot_password'
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name='inputotp'
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name='newpassword'
+              options={{
+                headerShown: false,
+              }}
+            />
+          </Stack>
+        )}
 
-      {/* </SafeAreaView> */}
-      <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
-    </ThemeProvider>
+        {/* </SafeAreaView> */}
+        <StatusBar style='auto' />
+      </ThemeProvider>
+    </GluestackUIProvider>
   );
 }

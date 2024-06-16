@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import SafeAreaViewAndroid from "@/components/SafeAreaViewAndroid";
 import { View as CustomView } from "@/components/Themed";
 import Typography from "@/components/Typography";
-import Input from "@/components/FormInput";
-import { Ionicons } from "@expo/vector-icons";
 import Button from "@/components/Button";
 import PasswordInput from "@/components/PasswordInput";
 import { useRouter } from "expo-router";
+import Modals from "@/components/Modal";
+import { BadgeCheck } from "@/assets/icons";
 
 const newpassword = () => {
   const router = useRouter();
@@ -17,6 +17,8 @@ const newpassword = () => {
     password: { value: "", isShowPassword: false, error: "" },
     confirmPassword: { value: "", isShowPassword: false, error: "" },
   });
+
+  const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
   const handlePasswordChange = (field: string, value: any) => {
     setNewPassword((prevState) => ({
@@ -53,10 +55,18 @@ const newpassword = () => {
       }));
       return;
     }
-    console.log("Password berhasil diubah", newPassword);
-    alert("Password berhasil diubah");
-    router.push("login");
+    setIsShowModal(true);
   };
+
+  React.useEffect(() => {
+    if (isShowModal) {
+      setTimeout(() => {
+        alert("Password berhasil diubah");
+        setIsShowModal(false);
+        router.push("login");
+      }, 1000);
+    }
+  }, [isShowModal]);
 
   return (
     <SafeAreaView style={SafeAreaViewAndroid.AndroidSafeArea}>
@@ -85,6 +95,19 @@ const newpassword = () => {
         <Button onPress={handleSubmit} variant='primary' size='base'>
           Submit
         </Button>
+
+        <Modals overLay={isShowModal} setOverLay={setIsShowModal}>
+          <View className='bg-white gap-y-5 flex-1 items-center justify-center rounded-3xl h-full'>
+            <View>
+              <Typography>
+                Selamat password kamu berhasil diperbaharui!
+              </Typography>
+              <Typography classNames='text-center'>
+                Silahkan Login Kembali
+              </Typography>
+            </View>
+          </View>
+        </Modals>
       </CustomView>
     </SafeAreaView>
   );

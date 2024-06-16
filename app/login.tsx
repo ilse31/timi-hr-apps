@@ -35,7 +35,7 @@ const Login = () => {
   };
 
   const handleSubmit = () => {
-    router.push("(tabs)");
+    router.push("One");
   };
 
   return (
